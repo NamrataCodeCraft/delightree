@@ -3,6 +3,7 @@ const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
+const PORT = process.env.PORT || 4000
 const databaseConnection = require('./config/database')
 
 async function serverStart() {
@@ -16,7 +17,8 @@ async function serverStart() {
 
     await server.start();
     app.use("/graphql", expressMiddleware(server));
-    app.listen(5000, () => { console.log(`server is running`) });
+
+    app.listen(PORT, () => { console.log(`server is running on ${PORT}`) });
 }
 serverStart();
 
